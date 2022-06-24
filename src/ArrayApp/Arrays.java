@@ -47,17 +47,30 @@ public class Arrays {
         }
     }
 
-    //NOT COMPLETED METHOD
+
     public void deleteAllMatchedElements(int element)
     {
+              int count = 0;
+              for (int i = 0; i < nElements; i++) {
+                  if (array[i] == element) {
+                      count++;
+                  }
+              }
 
+              while (count != 0) {
+                    deleteFirstMatchedElement(element);
+                  count--;
+              }
     }
 
     public void deleteAllElements()
     {
         array = null;
-        nElements--;
+        nElements = 0;
+        System.exit(1);
     }
+
+
 
     public boolean findElement(int searchKey) {
         for (int i = 0; i < nElements; i++)
@@ -91,6 +104,8 @@ public class Arrays {
          }
          else throw new ArrayException("no such id");
      }
+
+
     public void arrayOutput() throws ArrayException
     {
         if (array!=null) {
