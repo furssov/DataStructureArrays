@@ -108,6 +108,14 @@ public class Arrays {
          else throw new ArrayException("no such id");
      }
 
+     public void fillRandom(int maxElement)
+     {
+         for (int i = 0; i < size; i++)
+         {
+             array[i] = (int)(Math.random() * maxElement + 1);
+             nElements++;
+         }
+     }
 
     public void arrayOutput() throws ArrayException
     {
@@ -119,19 +127,46 @@ public class Arrays {
         else throw new ArrayException(new NullPointerException("array is null"));
     }
 
-    public void sort() {
-        int a;
-        for (int i = 0; i < nElements; i++) {
-            for (int j = 0; j < nElements; j++)
+    public void bubleSort() {
+           boolean isSorted = false;
+           int a;
+
+           while (!isSorted)
+           {
+               isSorted = true;
+               for (int i = 0 ; i < nElements - 1; i++)
+               {
+                   if (array[i] > array[i+1])
+                   {
+                       isSorted = false;
+                       swap(i, i + 1);
+                   }
+               }
+           }
+    }
+
+    public void selectionSort(){
+        int min;
+        for (int out = 0; out < nElements - 1; out++)
+        {
+            min = out;
+            for (int in = out + 1; in < nElements; in++)
             {
-              if (array[i] < array[j])
-              {
-                  a = array[j];
-                  array[j] = array[i];
-                  array[i] = a;
-              }
+                if (array[min] > array[in])
+                {
+                    min = in;
+
+                }
             }
+            swap(out, min);
         }
+    }
+
+    private void swap(int firstPos, int secondPos)
+    {
+        int a = array[firstPos];
+        array[firstPos] = array[secondPos];
+        array[secondPos] = a;
     }
 
     //this method returns index if element was found in array and -1 if it's wrong
