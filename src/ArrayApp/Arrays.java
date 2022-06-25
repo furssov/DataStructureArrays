@@ -5,9 +5,12 @@ public class Arrays {
     private int[] array;
     private int nElements;
 
+    private int size;
+
     public Arrays(int size) {
         array = new int[size];
         nElements = 0;
+        this.size = size;
     }
 
     public void addElement(int value) throws ArrayException {
@@ -65,9 +68,9 @@ public class Arrays {
 
     public void deleteAllElements()
     {
-        array = null;
+        array = new int[size];
         nElements = 0;
-        System.exit(1);
+
     }
 
 
@@ -116,6 +119,53 @@ public class Arrays {
         else throw new ArrayException(new NullPointerException("array is null"));
     }
 
+    public void sort() {
+        int a;
+        for (int i = 0; i < nElements; i++) {
+            for (int j = 0; j < nElements; j++)
+            {
+              if (array[i] < array[j])
+              {
+                  a = array[j];
+                  array[j] = array[i];
+                  array[i] = a;
+              }
+            }
+        }
+    }
+
+    //this method returns index if element was found in array and -1 if it's wrong
+    public int binarySearch(int searchKey)
+    {
+        int lowerBound = 0;
+        int upperBound = nElements - 1;
+        int currentPosition;
+
+        while (true)
+        {
+            currentPosition = (lowerBound + upperBound) / 2;
+            if (array[currentPosition] == searchKey)
+            {
+                return searchKey;
+            }
+            else if(lowerBound > upperBound)
+            {
+                return -1;
+            }
+            else
+            {
+                if (searchKey > array[currentPosition])
+                {
+                    lowerBound = currentPosition + 1;
+                }
+                if (searchKey < array[currentPosition])
+                {
+                    upperBound = currentPosition - 1;
+                }
+            }
+        }
+
+    }
     public int getSize()
     {
         return nElements;
