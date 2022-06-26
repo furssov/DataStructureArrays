@@ -162,6 +162,22 @@ public class Arrays {
         }
     }
 
+    public void insertionSort()
+    {
+        int in;
+        for (int out = 1; out < nElements; out++)
+        {
+            int buf = array[out];
+            in = out;
+            while (in > 0 && array[in - 1] >= buf)
+            {
+                array[in] = array[in - 1];
+                --in;
+            }
+            array[in] = buf;
+        }
+    }
+
     private void swap(int firstPos, int secondPos)
     {
         int a = array[firstPos];
