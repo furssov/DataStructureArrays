@@ -127,6 +127,7 @@ public class Arrays {
         else throw new ArrayException(new NullPointerException("array is null"));
     }
 
+
     public void bubleSort() {
            boolean isSorted = false;
            int a;
@@ -145,6 +146,7 @@ public class Arrays {
            }
     }
 
+    //сортировка выбором
     public void selectionSort(){
         int min;
         for (int out = 0; out < nElements - 1; out++)
@@ -162,6 +164,7 @@ public class Arrays {
         }
     }
 
+    //сортировка вставкой
     public void insertionSort()
     {
         int in;
@@ -177,6 +180,35 @@ public class Arrays {
             array[in] = buf;
         }
     }
+    //сортировка Шелла
+    public void shellSort()
+    {
+        int h = 1;
+        int buf;
+        int in;
+
+        while (h <= nElements/3)
+        {
+            h = 3 * h + 1;
+        }
+
+        while (h > 0)
+        {
+            for (int out = h; out < nElements; out++)
+            {
+               buf = array [out];
+               in = out;
+               while (in > h - 1 && array[in - h] >= buf)
+               {
+                   array[in] = array[in - h];
+                   in -= h;
+               }
+               array[in] = buf;
+            }
+            h = (h - 1) / 3;
+        }
+    }
+
 
     private void swap(int firstPos, int secondPos)
     {

@@ -6,21 +6,22 @@ import ArrayApp.Arrays;
 public class Main {
     public static void main(String[] args)  {
 
-        Arrays arrays = new Arrays(100000);
+        Arrays arrays = new Arrays(10);
 
 
-                arrays.fillRandom(200000);
+                arrays.fillRandom(30);
 
                  long before = System.currentTimeMillis();
-            arrays.bubleSort();
+            arrays.shellSort();
             long after = System.currentTimeMillis();
-            System.out.println(after - before + " - 1");
+            System.out.println(after - before + "ms - 1");
 
+            /*
         before = System.currentTimeMillis();
         arrays.insertionSort();
         after = System.currentTimeMillis();
         System.out.println(after - before + " - 2");
-
+         */
 
 
 
