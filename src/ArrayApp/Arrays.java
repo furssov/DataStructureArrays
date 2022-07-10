@@ -14,36 +14,29 @@ public class Arrays {
     }
 
     public void addElement(int value) throws ArrayException {
-        if (nElements < array.length ) {
+        if (nElements < array.length) {
             array[nElements] = value;
             nElements++;
-        }
-        else throw new ArrayException("no more memory");
+        } else throw new ArrayException("no more memory");
     }
 
     public void insertElement(int value, int position) throws ArrayException {
-        if (checkRange(position) && nElements < array.length)
-        {
+        if (checkRange(position) && nElements < array.length) {
             int a;
-            for (int i = position; i < nElements - 2; i++)
-            {
+            for (int i = position; i < nElements - 2; i++) {
                 a = array[i + 1];
-                array[i+1] = array[i];
+                array[i + 1] = array[i];
                 array[i + 2] = a;
             }
             array[position] = value;
             nElements++;
-        }
-        else throw new ArrayException("no more memory is free");
+        } else throw new ArrayException("no more memory is free");
 
     }
 
-    public void deleteFirstMatchedElement(int element)
-    {
-        if (findElement(element))
-        {
-            for (int i = getElementId(element); i < nElements - 1; i++)
-            {
+    public void deleteFirstMatchedElement(int element) {
+        if (findElement(element)) {
+            for (int i = getElementId(element); i < nElements - 1; i++) {
                 array[i] = array[i + 1];
             }
             nElements--;
@@ -51,35 +44,30 @@ public class Arrays {
     }
 
 
-    public void deleteAllMatchedElements(int element)
-    {
-              int count = 0;
-              for (int i = 0; i < nElements; i++) {
-                  if (array[i] == element) {
-                      count++;
-                  }
-              }
+    public void deleteAllMatchedElements(int element) {
+        int count = 0;
+        for (int i = 0; i < nElements; i++) {
+            if (array[i] == element) {
+                count++;
+            }
+        }
 
-              while (count != 0) {
-                    deleteFirstMatchedElement(element);
-                  count--;
-              }
+        while (count != 0) {
+            deleteFirstMatchedElement(element);
+            count--;
+        }
     }
 
-    public void deleteAllElements()
-    {
+    public void deleteAllElements() {
         array = new int[size];
         nElements = 0;
 
     }
 
 
-
     public boolean findElement(int searchKey) {
-        for (int i = 0; i < nElements; i++)
-        {
-            if (array[i] == searchKey)
-            {
+        for (int i = 0; i < nElements; i++) {
+            if (array[i] == searchKey) {
                 return true;
             }
         }
@@ -87,75 +75,61 @@ public class Arrays {
     }
 
     public int getElementId(int searchKey) {
-        if (findElement(searchKey))
-        {
-            for (int i = 0; i < nElements; i++)
-            {
-                if (array[i] == searchKey)
-                {
+        if (findElement(searchKey)) {
+            for (int i = 0; i < nElements; i++) {
+                if (array[i] == searchKey) {
                     return i;
                 }
             }
 
         }
-            return -1;
+        return -1;
     }
-     public int getElementByIndex(int index) throws ArrayException {
-         if (checkRange(index))
-         {
-             return array[index];
-         }
-         else throw new ArrayException("no such id");
-     }
 
-     public void fillRandom(int maxElement)
-     {
-         for (int i = 0; i < size; i++)
-         {
-             array[i] = (int)(Math.random() * maxElement + 1);
-             nElements++;
-         }
-     }
+    public int getElementByIndex(int index) throws ArrayException {
+        if (checkRange(index)) {
+            return array[index];
+        } else throw new ArrayException("no such id");
+    }
 
-    public void arrayOutput() throws ArrayException
-    {
-        if (array!=null) {
+    public void fillRandom(int maxElement) {
+        for (int i = 0; i < size; i++) {
+            array[i] = (int) (Math.random() * maxElement + 1);
+            nElements++;
+        }
+    }
+
+    public void arrayOutput() throws ArrayException {
+        if (array != null) {
             for (int i = 0; i < nElements; i++) {
                 System.out.print(array[i] + " ");
             }
-        }
-        else throw new ArrayException(new NullPointerException("array is null"));
+        } else throw new ArrayException(new NullPointerException("array is null"));
     }
 
 
     public void bubleSort() {
-           boolean isSorted = false;
-           int a;
+        boolean isSorted = false;
+        int a;
 
-           while (!isSorted)
-           {
-               isSorted = true;
-               for (int i = 0 ; i < nElements - 1; i++)
-               {
-                   if (array[i] > array[i+1])
-                   {
-                       isSorted = false;
-                       swap(i, i + 1);
-                   }
-               }
-           }
+        while (!isSorted) {
+            isSorted = true;
+            for (int i = 0; i < nElements - 1; i++) {
+                if (array[i] > array[i + 1]) {
+                    isSorted = false;
+                    swap(i, i + 1);
+                }
+            }
+        }
     }
 
     //сортировка выбором
-    public void selectionSort(){
+    public void selectionSort() {
         int min;
-        for (int out = 0; out < nElements - 1; out++)
-        {
+        for (int out = 0; out < nElements - 1; out++) {
             min = out;
-            for (int in = out + 1; in < nElements; in++)
-            {
-                if (array[min] > array[in])
-                {
+            for (int in = out + 1; in < nElements; in++) {
+                if (array[min] > array[in]) {
                     min = in;
 
                 }
@@ -165,48 +139,74 @@ public class Arrays {
     }
 
     //сортировка вставкой
-    public void insertionSort()
-    {
+    public void insertionSort() {
         int in;
-        for (int out = 1; out < nElements; out++)
-        {
+        for (int out = 1; out < nElements; out++) {
             int buf = array[out];
             in = out;
-            while (in > 0 && array[in - 1] >= buf)
-            {
+            while (in > 0 && array[in - 1] >= buf) {
                 array[in] = array[in - 1];
                 --in;
             }
             array[in] = buf;
         }
     }
+
     //сортировка Шелла
-    public void shellSort()
-    {
+    public void shellSort() {
         int h = 1;
         int buf;
         int in;
 
-        while (h <= nElements/3)
-        {
+        while (h <= nElements / 3) {
             h = 3 * h + 1;
         }
 
-        while (h > 0)
-        {
-            for (int out = h; out < nElements; out++)
-            {
-               buf = array [out];
-               in = out;
-               while (in > h - 1 && array[in - h] >= buf)
-               {
-                   array[in] = array[in - h];
-                   in -= h;
-               }
-               array[in] = buf;
+        while (h > 0) {
+            for (int out = h; out < nElements; out++) {
+                buf = array[out];
+                in = out;
+                while (in > h - 1 && array[in - h] >= buf) {
+                    array[in] = array[in - h];
+                    in -= h;
+                }
+                array[in] = buf;
             }
             h = (h - 1) / 3;
         }
+    }
+
+    public void quickSort(int left, int right) {
+        if (left - right <= 0)
+        {
+            return;
+        }
+        else
+        {
+            int divider = array[right];
+            int part = partition(left, right, divider);
+            quickSort(left, part - 1);
+            quickSort(part + 1, right);
+        }
+    }
+
+    private int partition(int left, int right, int divider)
+    {
+        int leftPtr = left - 1;
+        int rightPtr = right;
+        while (true)
+        {
+            while (array[++leftPtr] < divider)
+                ;
+            while (rightPtr > 0 && array[--rightPtr] > divider)
+                ;
+            if (leftPtr >= rightPtr)
+                break;
+            else
+                swap(leftPtr, rightPtr);
+        }
+        swap(leftPtr, right);
+        return leftPtr;
     }
 
 
